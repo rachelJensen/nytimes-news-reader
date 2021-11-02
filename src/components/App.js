@@ -1,27 +1,29 @@
-
 import './App.css';
+import { useState } from 'react';
+import { getStories } from '../apiCalls.js';
+import Search from './Search'
 
-//process.env.REACT_APP_API_KEY
+
 
 function App() {
-  
+  // keep subject in App state so navigating between headlines and detailed view doesn't reset the search
+  const [category, setCategory] = useState('home');
+  const [stories, setStories] = useState([])
+
+  const setFromSearch = (topic) => {
+    setCategory(topic);
+    getStories(topic)
+      .then(data => setStories(data))
+  }
+
 
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        NY Times News Reader
       </header>
+      <Search setFromSearch={setFromSearch}/>
     </div>
   );
 }
