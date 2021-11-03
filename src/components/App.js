@@ -42,11 +42,18 @@ function App() {
         NY Times News Reader
         <Search setFromSearch={setFromSearch}/>   
       </header>
-      {console.log('size', size)}
-
-      {size < 800 ? <div>Phone</div> : <div>Tablet</div>}
-      {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle}/>}
-      {article.title && <DetailedView article={article}/>}
+      {size > 800 
+        ?
+        <main className='main-large'>
+          {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle}/>}
+          {article.title && <DetailedView article={article}/>}
+        </main>
+        :
+        <main className='main-small'>
+          {article.title && <DetailedView article={article}/>}
+          {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle}/>}
+        </main>
+      }   
     </div>
   );
 }
