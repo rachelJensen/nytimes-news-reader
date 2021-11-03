@@ -1,6 +1,6 @@
 import './Headlines.css';
 
-const Headlines = ({ stories, categoryHead, setArticle }) => {
+const Headlines = ({ stories, categoryHead, setArticle, setShowArticle }) => {
   // use the stories from App to generate a list of headlines
   const headlines = stories.results.map((story, index) => {
     return <li value={index} key={index} onClick={(event) => {handleDetails(event)}}>{story.title}</li>
@@ -11,6 +11,7 @@ const Headlines = ({ stories, categoryHead, setArticle }) => {
     //could I set the index as the value, then use the value to pull up the right story in the detailed view?
     event.preventDefault();
     setArticle(stories.results[event.target.value])
+    setShowArticle(true)
   }
 
   return (
