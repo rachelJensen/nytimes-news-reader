@@ -32,10 +32,6 @@ function App() {
       })
   }
 
-  // if the screen size is large enough, render both Headlines and DetailedView
-  // if the screen is smaller, render Headlines OR DetailedView
-
-
   return (
     <div className="App">
       <header className="App-header">
@@ -50,7 +46,7 @@ function App() {
         </main>
         :
         <main className='main-small'>
-          {article.title && <DetailedView article={article}/>}
+          {article.title && <DetailedView article={article}  canClose={true}/>}
           {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle}/>}
         </main>
       }   
