@@ -12,10 +12,13 @@ function App() {
   const [category, setCategory] = useState('home');
   const [categoryHead, setCategoryHead] = useState('');
   const [stories, setStories] = useState({});
-  const [article, setArticle] = useState({})
+  const [article, setArticle] = useState({});
+  const [size, setSize] = useState(window.innerWidth)
 
   useEffect(() => {
     setFromSearch(category)
+    //add a resize event listener
+    window.addEventListener('resize', () => setSize(window.innerWidth) )
   }, [])
 
   const setFromSearch = (topic) => {
@@ -24,20 +27,26 @@ function App() {
       .then(data => {
         setStories(data)
         setCategoryHead(data.section)
+        setArticle(data.results[0])
         console.log('cateogry check in APP', category, stories)
       })
   }
 
-  console.log("article", article)
+  // if the screen size is large enough, render both Headlines and DetailedView
+  // if the screen is smaller, render Headlines OR DetailedView
+
 
   return (
     <div className="App">
       <header className="App-header">
         NY Times News Reader
+        <Search setFromSearch={setFromSearch}/>   
       </header>
-      <Search setFromSearch={setFromSearch}/>
+      {console.log('size', size)}
+
+      {size < 800 ? <div>Phone</div> : <div>Tablet</div>}
       {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle}/>}
-      <DetailedView article={article}/>
+      {article.title && <DetailedView article={article}/>}
     </div>
   );
 }
