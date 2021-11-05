@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { getStories } from '../apiCalls.js';
+import { getStories } from '../apiCalls';
 import { IArticle, IStories } from '../interfaces';
 import Search from './Search';
 import Headlines from './Headlines';
