@@ -25,8 +25,8 @@ const DetailedView = ({ article, canClose, showArticle, setShowArticle }) => {
         <h4>{article.byline}</h4>
         <h4>{date}</h4>
         <p>{article.abstract}</p>
-        <h5><a href={article.url} title={article.title}>Read more at the New York Times</a></h5>
-        {canClose && <button onClick={() => setShowArticle(false)}>Can Close</button>}
+        <h5><a className='outside-link' href={article.url} title={article.title}>Read more at the New York Times</a></h5>
+        {canClose && <button className='close' onClick={() => setShowArticle(false)}>Close</button>}
       </div>}
     </article>
   )
