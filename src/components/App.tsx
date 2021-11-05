@@ -7,7 +7,6 @@ import Headlines from './Headlines';
 import DetailedView from './DetailedView';
 
 
-
 function App() {
   const [category, setCategory] = useState<string>('home');
   const [categoryHead, setCategoryHead] = useState<string>('');
