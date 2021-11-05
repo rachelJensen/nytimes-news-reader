@@ -8,14 +8,16 @@ import DetailedView from './DetailedView';
 
 
 function App() {
-  // keep subject in App state so navigating between headlines and detailed view doesn't reset the search
   const [category, setCategory] = useState('home');
   const [categoryHead, setCategoryHead] = useState('');
   const [stories, setStories] = useState({});
-  const [article, setArticle] = useState({})
+  const [article, setArticle] = useState({});
+  const [size, setSize] = useState(window.innerWidth);
+  const [showArticle, setShowArticle] = useState(true);
 
   useEffect(() => {
     setFromSearch(category)
+    window.addEventListener('resize', defineDisplay)
   }, [])
 
   const setFromSearch = (topic) => {
@@ -24,20 +26,39 @@ function App() {
       .then(data => {
         setStories(data)
         setCategoryHead(data.section)
-        console.log('cateogry check in APP', category, stories)
+        setArticle(data.results[0])
       })
   }
 
-  console.log("article", article)
+  const defineDisplay = () => {
+    setSize(window.innerWidth);
+    if (window.innerWidth > 750) {
+      setShowArticle(true)
+    } else {
+      setShowArticle(false)
+    }
+  }
 
   return (
     <div className="App">
       <header className="App-header">
         NY Times News Reader
+        <Search setFromSearch={setFromSearch}/>   
       </header>
-      <Search setFromSearch={setFromSearch}/>
-      {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle}/>}
-      <DetailedView article={article}/>
+      <div className='main-container'>
+        {size > 750 
+          ?
+          <main className='main-large'>
+            {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle} setShowArticle={setShowArticle} />}
+            {article.title && <DetailedView article={article} canClose={false} showArticle={showArticle} setShowArticle={setShowArticle}/>}
+          </main>
+          :
+          <main className='main-small'>
+            {article.title && <DetailedView article={article}  canClose={true} showArticle={showArticle} setShowArticle={setShowArticle} />}
+            {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle} setShowArticle={setShowArticle} />}
+          </main>
+      } 
+      </div>  
     </div>
   );
 }
