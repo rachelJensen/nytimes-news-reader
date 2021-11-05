@@ -7,8 +7,8 @@ export interface IStories {
 export interface IPropsToDV {
   article: IArticle,
   canClose: boolean,
-  showArticle: any,
-  setShowArticle: any
+  showArticle: boolean,
+  setShowArticle: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface IArticle {
@@ -20,7 +20,7 @@ export interface IArticle {
   abstract: string
 }
 
-export interface IMultimedia {
+interface IMultimedia {
   url: string
 }
 
@@ -28,6 +28,11 @@ export interface IMultimedia {
 export interface IPropsToHeadline {
   stories: IStories,
   categoryHead: string,
-  setArticle: any,
-  setShowArticle: any
+  setArticle: React.Dispatch<React.SetStateAction<IArticle>>,
+  setShowArticle: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+
+export interface ISearch {
+  setFromSearch: any
 }
