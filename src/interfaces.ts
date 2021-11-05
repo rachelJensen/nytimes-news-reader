@@ -1,3 +1,8 @@
+export interface IStories {
+  status: string
+}
+
+
 export interface IPropsToDV {
   article: IArticle,
   canClose: boolean,
@@ -17,3 +22,4 @@ export interface IArticle {
 export interface IMultimedia {
   url: string
 }
+
