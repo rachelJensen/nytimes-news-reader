@@ -1,10 +1,11 @@
 import './DetailedView.css';
-import { useEffect } from 'react/cjs/react.development';
+import { useEffect } from 'react';
 import { getDate } from '../utils';
 import { useState } from 'react';
+import { IPropsToDV } from '../interfaces';
 
-const DetailedView = ({ article, canClose, showArticle, setShowArticle }) => {
-  const [date, setDate] = useState('')
+const DetailedView = ({ article, canClose, showArticle, setShowArticle }: IPropsToDV) => {
+  const [date, setDate] = useState<string>('')
 
   useEffect(() => {
     if (canClose) {
@@ -13,9 +14,6 @@ const DetailedView = ({ article, canClose, showArticle, setShowArticle }) => {
     const day = getDate(article.created_date)
     setDate(day);
   }, [])
-
-  // console.log(getDate(article.created_date))
-
   
   return (
     <article>
