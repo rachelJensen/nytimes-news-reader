@@ -1,7 +1,8 @@
 export interface IStories {
-  status: string
-}
+  status: string,
+  results: IArticle[],
 
+}
 
 export interface IPropsToDV {
   article: IArticle,
@@ -23,3 +24,10 @@ export interface IMultimedia {
   url: string
 }
 
+
+export interface IPropsToHeadline {
+  stories: IStories,
+  categoryHead: string,
+  setArticle: any,
+  setShowArticle: any
+}
