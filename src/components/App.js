@@ -27,18 +27,19 @@ function App() {
         setStories(data)
         setCategoryHead(data.section)
         setArticle(data.results[0])
-
       })
   }
 
   const defineDisplay = () => {
     setSize(window.innerWidth);
-    if (window.innerWidth > 800) {
+    if (window.innerWidth > 750) {
       setShowArticle(true)
     } else {
       setShowArticle(false)
     }
   }
+
+  // console.log('article,', article)
 
   return (
     <div className="App">
@@ -46,18 +47,20 @@ function App() {
         NY Times News Reader
         <Search setFromSearch={setFromSearch}/>   
       </header>
-      {size > 800 
-        ?
-        <main className='main-large'>
-          {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle} setShowArticle={setShowArticle} />}
-          {article.title && <DetailedView article={article} canClose={false} showArticle={showArticle} setShowArticle={setShowArticle}/>}
-        </main>
-        :
-        <main className='main-small'>
-          {article.title && <DetailedView article={article}  canClose={true} showArticle={showArticle} setShowArticle={setShowArticle} />}
-          {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle} setShowArticle={setShowArticle} />}
-        </main>
-      }   
+      <div className='main-container'>
+        {size > 750 
+          ?
+          <main className='main-large'>
+            {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle} setShowArticle={setShowArticle} />}
+            {article.title && <DetailedView article={article} canClose={false} showArticle={showArticle} setShowArticle={setShowArticle}/>}
+          </main>
+          :
+          <main className='main-small'>
+            {article.title && <DetailedView article={article}  canClose={true} showArticle={showArticle} setShowArticle={setShowArticle} />}
+            {stories.status === 'OK' && <Headlines stories={stories} categoryHead={categoryHead} setArticle={setArticle} setShowArticle={setShowArticle} />}
+          </main>
+      } 
+      </div>  
     </div>
   );
 }
