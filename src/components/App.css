@@ -17,10 +17,6 @@
   color: white;
 }
 
-/* h1 {
-  font-size: 36px;
-} */
-
 .main-container {
   display: flex;
   justify-content: center;
@@ -29,7 +25,8 @@
 
 .main-large {
   display: flex;
-  width: 100vh;
+  justify-content: center;
+  width: 100vw;
   height: auto;
 }
 
@@ -40,12 +37,12 @@
 }
 
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1300px) {
   .main-large {
-    width: 1400px;
+    width: 1300px;
   }
 
   .App-header {
-    width: 1400px;
+    width: 1300px;
   }
 }
