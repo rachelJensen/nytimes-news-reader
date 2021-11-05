@@ -1,26 +1,26 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { getStories } from '../apiCalls.js';
+import { IArticle, IStories } from '../interfaces';
 import Search from './Search';
 import Headlines from './Headlines';
 import DetailedView from './DetailedView';
 
 
-
 function App() {
-  const [category, setCategory] = useState('home');
-  const [categoryHead, setCategoryHead] = useState('');
-  const [stories, setStories] = useState({});
-  const [article, setArticle] = useState({});
-  const [size, setSize] = useState(window.innerWidth);
-  const [showArticle, setShowArticle] = useState(true);
+  const [category, setCategory] = useState<string>('home');
+  const [categoryHead, setCategoryHead] = useState<string>('');
+  const [stories, setStories] = useState<IStories>({} as IStories);
+  const [article, setArticle] = useState<IArticle>({} as IArticle);
+  const [size, setSize] = useState<number>(window.innerWidth);
+  const [showArticle, setShowArticle] = useState<boolean>(true);
 
   useEffect(() => {
     setFromSearch(category)
     window.addEventListener('resize', defineDisplay)
   }, [])
 
-  const setFromSearch = (topic) => {
+  const setFromSearch = (topic: string) => {
     setCategory(topic);
     getStories(topic)
       .then(data => {
