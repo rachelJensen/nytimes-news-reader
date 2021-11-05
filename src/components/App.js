@@ -39,8 +39,6 @@ function App() {
     }
   }
 
-  // console.log('article,', article)
-
   return (
     <div className="App">
       <header className="App-header">
